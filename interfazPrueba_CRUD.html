@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiMap - CRUD de Conductores</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="logopng.png" type="image/png">
+    <style>
+        .contenedor {
+            width: 40%;
+            margin-right: 100px;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        .seccionCrud {
+            margin-bottom: 20px;
+        }
+        .formularioCrud {
+            display: flex;
+            flex-direction: column;
+        }
+        .formularioCrud label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .formularioCrud input, .formularioCrud select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .formularioCrud button:hover {
+            background-color: #2968c8;
+        }
+        .botonEliminar {
+            background-color: #e74c3c;
+        }
+        .botonEliminar:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body class="alineacion">
+    <div class="contenedor">
+        <header class="alineacion">
+            <img src="logopng.png" alt="Logo" class="logo">
+            <h1>Gestión de conductores</h1>
+        </header>
+        <main>
+            <section class="seccionCrud">
+                <form class="formularioCrud" method="POST" action="CRUDConductores.php">
+                    <label for="nombreConductor">Nombre del conductor:</label>
+                    <input type="text" id="nombreConductor" name="nombreConductor" placeholder="Nombre completo" required>
+
+                    <label for="correoConductor">Correo electrónico:</label>
+                    <input type="email" id="correoConductor" name="correoConductor" placeholder="correo@ejemplo.com">
+
+                    <label for="telefonoConductor">Teléfono:</label>
+                    <input type="tel" id="telefonoConductor" name="telefonoConductor" placeholder="Número de teléfono" required>
+
+                    <label for="usuarioConductor">Usuario:</label>
+                    <input type="text" id="usuarioConductor" name="usuarioConductor" placeholder="Usuario" required>
+
+                    <label for="contrasenaConductor">Contraseña:</label>
+                    <input type="password" id="contrasenaConductor" name="contrasenaConductor" placeholder="Contraseña" required>
+
+                    <label for="matriculaConductor">Matrícula:</label>
+                    <input type="text" id="matriculaConductor" name="matriculaConductor" placeholder="Matrícula" required>
+
+                    <label for="estadoConductor">Estado:</label>
+                    <select id="estadoConductor" name="estadoConductor" required>
+                        <option value="">Seleccione un estado</option>
+                        <option value="activo">Activo</option>
+                        <option value="inactivo">Inactivo</option>
+                    </select>
+
+                    <div class="grupoBotones">
+                        <button type="submit" name="accion" value="crear">Crear</button>
+                        <button type="submit" name="accion" value="actualizar">Actualizar</button>
+                        <button type="submit" name="accion" value="buscar">Buscar</button>
+                        <button type="submit" name="accion" value="eliminar" class="botonEliminar">Eliminar</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <section class="contenedor">
+        <h2>Resultados de búsqueda</h2>
+        <table class="tablaConductores">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Correo electrónico</th>
+                    <th>Teléfono</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se mostrarán los resultados de búsqueda -->
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
