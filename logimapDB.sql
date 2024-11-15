@@ -1,5 +1,5 @@
 CREATE DATABASE Logimap;
-
+\c logimap;
 CREATE TABLE rol (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL UNIQUE
@@ -9,7 +9,15 @@ INSERT INTO rol (nombre) VALUES
     ('administrador'),
     ('conductor'),
     ('usuario_comun');
+CREATE TABLE EstadoConductor (
+    id SERIAL PRIMARY KEY,
+    descripcion VARCHAR(15) NOT NULL
+);
 
+CREATE TABLE EstadoEntrega (
+    id SERIAL PRIMARY KEY,
+    descripcion VARCHAR(15) NOT NULL
+);
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nombre_completo VARCHAR(100) NOT NULL,
@@ -26,6 +34,7 @@ CREATE INDEX idx_usuarios_rol ON usuarios(id_rol);
 CREATE TABLE conductor (
     id SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL,
+    id_estadoConductor INT NOT NULL,
     matricula VARCHAR(20) NOT NULL UNIQUE,
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (id_estadoConductor) REFERENCES EstadoConductor(id) ON DELETE CASCADE ON UPDATE CASCADE
@@ -37,15 +46,7 @@ CREATE TABLE administrador (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE TABLE EstadoConductor (
-    id SERIAL PRIMARY KEY,
-    descripcion VARCHAR(15) NOT NULL
-);
 
-CREATE TABLE EstadoEntrega (
-    id SERIAL PRIMARY KEY,
-    descripcion VARCHAR(15) NOT NULL
-);
 
 CREATE TABLE Paquete (
     id SERIAL PRIMARY KEY,
@@ -58,9 +59,9 @@ CREATE TABLE Paquete (
 
 CREATE TABLE paquetesConductor (
     id SERIAL PRIMARY KEY,
-    id_paquete INT NOT NULL REFERENCES Paquete(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    id_conductor INT NOT NULL REFERENCES Conductor(id) ON DELETE CASCADE ON UPDATE CASCADE,
-    id_estado_entrega INT REFERENCES EstadoEntrega(id)
+    id_paquete INT REFERENCES Paquete(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    id_conductor INT REFERENCES Conductor(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    id_estado_entrega INT NOT NULL REFERENCES estadoentrega(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE INDEX idx_paquete_id ON paquetesConductor(id_paquete);
@@ -96,9 +97,25 @@ INSERT INTO EstadoEntrega (descripcion) VALUES
     ('Pendiente'),
     ('Entregado'),
     ('Fallido');
-CREATE VIEW entregas AS
-SELECT 
+    CREATE VIEW entregas AS
+SELECT
     pc.id_paquete,
     ee.descripcion AS estado_entrega
 FROM paquetesconductor pc
 JOIN estadoentrega ee ON pc.id_estado_entrega = ee.id;
+CREATE OR REPLACE FUNCTION insertar_paquete_conductor()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Insertar una nueva entrada en paquetesConductor
+    INSERT INTO paquetesConductor (id_paquete, id_conductor, id_estado_entrega)
+    VALUES (NEW.id, NULL,
+            (SELECT id FROM EstadoEntrega WHERE descripcion = 'Pendiente' LIMIT 1));
+
+    -- Retornar el nuevo registro del paquete
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER trigger_insertar_paquete_conductor
+AFTER INSERT ON Paquete
+FOR EACH ROW
+EXECUTE FUNCTION insertar_paquete_conductor();
