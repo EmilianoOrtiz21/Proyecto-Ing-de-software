@@ -27,7 +27,8 @@ CREATE TABLE conductor (
     id SERIAL PRIMARY KEY,
     id_usuario INT NOT NULL,
     matricula VARCHAR(20) NOT NULL UNIQUE,
-    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (id_estadoConductor) REFERENCES EstadoConductor(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE administrador (
