@@ -96,3 +96,9 @@ INSERT INTO EstadoEntrega (descripcion) VALUES
     ('Pendiente'),
     ('Entregado'),
     ('Fallido');
+CREATE VIEW entregas AS
+SELECT 
+    pc.id_paquete,
+    ee.descripcion AS estado_entrega
+FROM paquetesconductor pc
+JOIN estadoentrega ee ON pc.id_estado_entrega = ee.id;
