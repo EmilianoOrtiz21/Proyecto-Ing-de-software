@@ -13,10 +13,7 @@ class Aplicacion {
     private $conexionBD;
 
     public function __construct() {
-        // Crear una sola instancia de conexión a la base de datos
-        $this->conexionBD = new ConexionDB();
-
-        // Pasar la conexión a cada instancia de las clases administradoras
+        $this->conexionBD = new ConexionBD();
         $this->sesion = new Sesion();
         $this->adminConductores = new AdminConductores();
         $this->adminPaquetes = new AdminPaquetes();
@@ -24,6 +21,10 @@ class Aplicacion {
     }
 
     public function procesarSolicitud($solicitud) {
+        if (empty($solicitud['accion'])) {
+            return "Acción no especificada";
+        }
+
         $accion = $solicitud['accion'];
         switch ($accion) {
             case 'iniciarSesion':
@@ -31,11 +32,22 @@ class Aplicacion {
             case 'cerrarSesion':
                 return $this->sesion->cerrarSesion();
             case 'crearConductor':
-                return $this->adminConductores->crearConductor($solicitud['datos']);
-            case 'asignarPaquetes':
-                return $this->adminConductores->asignaPaquetes();
-            case 'buscarPaquete':
-                return $this->adminPaquetes->buscarPaquete($solicitud['codigo']);
+                $nombre = $solicitud['datos']['nombreConductor'];
+                $telefono = $solicitud['datos']['telefonoConductor'];
+                $correo = $solicitud['datos']['correoConductor'];
+                $usuario = $solicitud['datos']['usuarioConductor'];
+                $contrasena = $solicitud['datos']['contrasenaConductor'];
+                $matricula = $solicitud['datos']['matriculaConductor'];
+                $estado = $solicitud['datos']['estadoConductor'];
+                return $this->adminConductores->CrearConductor($nombre, $telefono, $correo, $usuario, $contrasena, $matricula, $estado);
+            case 'cargarEstados':
+                return $this->adminConductores->dameEstadosEntrega();
+            case 'asignarHorario':
+                return $this->adminPaquetes->asignarFranjaHoraria($solicitud['franja_horaria_min'], $solicitud['franja_horaria_max']);
+            case 'obtenerEstadoEntrega':
+                return $this->adminPaquetes->dameEstadoEntrega($solicitud['codigo']);
+            case 'listarPaquetes':
+                return $this->adminPaquetes->listarPaquetes();
             case 'crearReporteConductor':
                 return $this->adminReportes->crearReporteConductor($solicitud['idConductor'], $solicitud['datos']);
             default:
