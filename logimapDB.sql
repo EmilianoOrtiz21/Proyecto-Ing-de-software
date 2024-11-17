@@ -46,8 +46,6 @@ CREATE TABLE administrador (
     FOREIGN KEY (id_usuario) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
-
 CREATE TABLE Paquete (
     id SERIAL PRIMARY KEY,
     codigo_unico VARCHAR(50) UNIQUE NOT NULL,
@@ -61,6 +59,7 @@ CREATE TABLE paquetesConductor (
     id SERIAL PRIMARY KEY,
     id_paquete INT REFERENCES Paquete(id) ON DELETE CASCADE ON UPDATE CASCADE,
     id_conductor INT REFERENCES Conductor(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    fecha_entrega TIMESTAMP,
     id_estado_entrega INT NOT NULL REFERENCES estadoentrega(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
@@ -97,12 +96,15 @@ INSERT INTO EstadoEntrega (descripcion) VALUES
     ('Pendiente'),
     ('Entregado'),
     ('Fallido');
-    CREATE VIEW entregas AS
+CREATE VIEW entregas AS
 SELECT
     pc.id_paquete,
-    ee.descripcion AS estado_entrega
+    ee.descripcion AS estado_entrega,
+    codigo_unico,
+    franja_horaria_min,
+    franja_horaria_max
 FROM paquetesconductor pc
-JOIN estadoentrega ee ON pc.id_estado_entrega = ee.id;
+JOIN estadoentrega ee ON pc.id_estado_entrega = ee.id JOIN paquete p ON p.id = pc.id_paquete;
 CREATE OR REPLACE FUNCTION insertar_paquete_conductor()
 RETURNS TRIGGER AS $$
 BEGIN
