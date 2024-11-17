@@ -3,111 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LogiMap - Notificaciones</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-/* Estilos generales */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
+    <title>Prueba AdminPaquetes</title>
+    <script src="paqueteCliente.js"></script>
 
-body {
-    background-color: #f5f5f5;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.contenedor {
-    width: 80%;
-    max-width: 1000px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Estilos del encabezado */
-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-header h1 {
-    color: #3483fa; /* Azul Mercado Libre */
-}
-
-/* Secci�n de notificaciones */
-.seccionNotificaciones {
-    margin-bottom: 20px;
-}
-
-.seccionNotificaciones h2 {
-    color: #333;
-    margin-bottom: 15px;
-    font-size: 24px;
-    text-align: center;
-}
-
-/* Estilos de la lista de notificaciones */
-.listaNotificaciones {
-    list-style-type: none;
-    padding: 0;
-}
-
-.listaNotificaciones li {
-    background-color: #f0f8ff; /* Azul claro */
-    margin-bottom: 10px;
-    padding: 15px;
-    border-left: 5px solid #3483fa; /* Resaltar notificaciones con un borde azul */
-    border-radius: 5px;
-    font-size: 18px;
-    color: #555;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.listaNotificaciones li:hover {
-    background-color: #e6f2ff; /* Cambio de color al pasar el rat�n */
-}
-
-/* Estilos del pie de p�gina */
-footer {
-    text-align: center;
-    margin-top: 20px;
-}
-
-footer p {
-    color: #777;
-    font-size: 14px;
-}
-    </style>
 </head>
 <body>
-    <div class="contenedor">
-        <header>
-            <h1>LogiMap - Notificaciones</h1>
-        </header>
-        <main>
-            <section class="seccionNotificaciones">
-                <h2>Listado de Novedades</h2>
-                <ul class="listaNotificaciones">
-                    <li>&Uacute;ltima entrega completada con &eacute;xito en la direcci&oacute;n Calle Falsa 123.</li>
-                    <li>El paquete con ID #234567 se ha retrasado debido a condiciones adversas de tr&aacute;fico.</li>
-                    <li>El veh&iacute;culo con matr&iacute;cula ABC123 ha sido redirigido a una nueva ruta por un accidente.</li>
-                    <li>Se ha actualizado el estado del paquete con ID #123456 a &quot;Entregado&quot;.</li>
-                    <li>Nueva actualizaci&oacute;n de software disponible para LogiMap. Recomendamos realizar la actualizaci&oacute;n.</li>
-                    <li>El paquete con ID #789012 est&aacute; en camino y se espera su entrega antes de las 15:00.</li>
-                </ul>
-            </section>
-        </main>
-        <footer>
-            <p>&copy; 2024 LogiMap. Todos los derechos reservados.</p>
-        </footer>
-    </div>
+    <h1>Administrar Paquetes</h1>
+
+    <!-- Formulario para consultar el estado de entrega -->
+    <h2>Consultar Estado de Entrega</h2>
+    <form id="form_consultar_estado" method="POST">
+        <label for="codigo_paquete">Código del Paquete:</label>
+        <input type="text" id="codigo_paquete" name="codigo_paquete" required>
+        <button type="submit" name="consultar_estado">Consultar Estado</button>
+    </form>
+    <h2>Informacion del paquete</h2>
+    <ul id = "datos_Paquete">
+    </ul>
+    <h2>Asignar Horario</h2>
+    <form id="form_asignar_horario" method="POST" style="display: none;"> <!-- Por defecto oculto -->
+        <label for="franja_horaria_min">Franja Horaria Mínima:</label>
+        <input type="time" id="franja_horaria_min" name="franja_horaria_min" required>
+        <br>
+        <label for="franja_horaria_max">Franja Horaria Máxima:</label>
+        <input type="time" id="franja_horaria_max" name="franja_horaria_max" required>
+        <br>
+        <button type="submit" name="asignar_horario">Asignar Horario</button>
+    </form>
+
+    <h2>Listar Todos los Paquetes</h2>
+    <form id="form_listar_paquetes" method="POST">
+        <button type="submit" name="listar_paquetes">Listar Paquetes</button>
+    </form>
+
+    <div id="mensaje_error"></div>
+
+    <h2>Lista de Paquetes</h2>
+    <table id="tabla_paquetes" border="1">
+        <thead>
+            <tr>
+                <th>Código del Paquete</th>
+                <th>Nombre del Destinatario</th>
+                <th>Franja Horaria Mínima</th>
+                <th>Franja Horaria Máxima</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se llenarán las filas con JavaScript -->
+        </tbody>
+    </table>
 </body>
 </html>
