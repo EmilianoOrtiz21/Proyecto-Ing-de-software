@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiMap - CRUD de Conductores</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="crud.js"></script>
+    <link rel="icon" href="logopng.png" type="image/png">
+</head>
+<body class="alineacion">
+    <div class="contenedor">
+        <header class="alineacion">
+            <img src="logopng.png" alt="Logo" class="logo">
+            <h1>Gestión de conductores</h1>
+        </header>
+        <main>
+            <section class="seccionCrud">
+                <form id="formConductor" class="formularioCrud">
+                    <label for="nombreConductor">Nombre del conductor:</label>
+                    <input type="text" id="nombreConductor" name="nombreConductor" placeholder="Nombre completo" required>
+
+                    <label for="correoConductor">Correo electrónico:</label>
+                    <input type="email" id="correoConductor" name="correoConductor" placeholder="correo@ejemplo.com">
+
+                    <label for="telefonoConductor">Teléfono:</label>
+                    <input type="tel" id="telefonoConductor" name="telefonoConductor" placeholder="Número de teléfono" required>
+
+                    <label for="usuarioConductor">Usuario:</label>
+                    <input type="text" id="usuarioConductor" name="usuarioConductor" placeholder="Usuario" required>
+
+                    <label for="contrasenaConductor">Contraseña:</label>
+                    <input type="password" id="contrasenaConductor" name="contrasenaConductor" placeholder="Contraseña" required>
+
+                    <label for="matriculaConductor">Matrícula:</label>
+                    <input type="text" id="matriculaConductor" name="matriculaConductor" placeholder="Matrícula" required>
+
+                    <label for="estadoConductor">Estado:</label>
+                    <select id="estadoConductor" name="estadoConductor" required>
+                        <option value="">Seleccione un estado</option>
+                    </select>
+
+                    <div class="grupoBotones">
+                        <button type="button" onclick="enviarDatos('crearConductor')">Crear</button>
+                        <button type="button" onclick="enviarDatos('actualizarConductor')">Actualizar</button>
+                        <button type="button" onclick="enviarDatos('buscarConductor')">Buscar</button>
+                        <button type="button" onclick="enviarDatos('eliminarConductor')" class="botonEliminar">Eliminar</button>
+                        <button type="button" onclick="asignarPaquetes()" class="botonEliminar">asignar Paq</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

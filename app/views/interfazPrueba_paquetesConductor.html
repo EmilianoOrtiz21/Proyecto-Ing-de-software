@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiMap - Paquetes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="logopng.png" type="image/png">
+
+    <style>
+        header {
+            padding-top:10px;
+            justify-content: space-between;
+        }
+        .contenedor {
+            width: 80%;
+        }
+        .seccionPaquetes {
+            margin-bottom: 20px;
+        }
+        .tablaPaquetes tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .contenedor{
+            width: 100%;
+            height: 90%;
+            overflow-y:auto;
+        }
+        .grupoBotones{
+            max-width:200px;
+            width:60%;
+            height: 60%;
+            flex-direction: column;
+            margin-left: 30px;
+        }
+        button{
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body class = "alineacion">
+    <div class="contenedor">
+        <header >
+            <img src="logopng.png" alt="Logo" class = "logo">
+            <h1>Paquetes para Entregar</h1>
+        </header>
+            <section class="seccionPaquetes">
+                <div>
+                    <h2>Paquetes</h2>
+                </div>
+                <table class="tablaPaquetes">
+                    <thead>
+                        <tr>
+                            <th>ID del Paquete</th>
+                            <th>Destinatario</th>
+                            <th>Direcci&oacute;n</th>
+                            <th>Franja Horaria</th>
+                            <th>Distancia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>Juan P&eacute;rez</td>
+                            <td>Calle Falsa 123</td>
+                            <td>10:00 - 12:00</td>
+                            <td>5 km</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Mar&iacute;a L&oacute;pez</td>
+                            <td>Avenida Siempre Viva 742</td>
+                            <td>12:00 - 14:00</td>
+                            <td>3 km</td>
+                        </tr>
+                        <tr>
+                            <td>003</td>
+                            <td>Carlos G&oacute;mez</td>
+                            <td>Calle de la Amargura 456</td>
+                            <td>14:00 - 16:00</td>
+                            <td>8 km</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+    </div>
+    <div class = "contenedor alineacion grupoBotones">
+        <button type="submit">Mapa</button>
+        <button type="submit">Calcular ruta</button>
+        <button type="submit">Reportar</button>
+        <button type="submit">Marcar como entregado</button>
+    </div>
+</body>
+</html>

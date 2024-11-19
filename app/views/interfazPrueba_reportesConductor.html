@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiMap - Reporte de Incidente</title>
+    <style>
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.contenedor {
+    width: 80%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos del encabezado */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #3483fa; /* Azul Mercado Libre */
+}
+
+/* Sección de reportes */
+.seccion-reporte {
+    margin-bottom: 20px;
+}
+
+/* Estilos del formulario de reporte */
+.formulario-reporte {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario-reporte label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.formulario-reporte input,
+.formulario-reporte textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.formulario-reporte button {
+    background-color: #3483fa;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.formulario-reporte button:hover {
+    background-color: #2968c8;
+}
+
+/* Estilos del pie de página */
+footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+footer p {
+    color: #777;
+    font-size: 14px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <header>
+            <h1>LogiMap - Reporte de Incidente</h1>
+        </header>
+        <main>
+            <section class="seccion-reporte">
+                <h2>Llena el siguiente reporte de incidente</h2>
+                <form class="formulario-reporte">
+                    <label for="id-paquete">ID del Paquete:</label>
+                    <input type="text" id="id-paquete" name="id-paquete" placeholder="Ej: 001" required>
+
+                    <label for="nombre-transportista">Nombre del Transportista:</label>
+                    <input type="text" id="nombre-transportista" name="nombre-transportista" placeholder="Tu nombre" required>
+
+                    <label for="descripcion-incidente">Descripci&oacute;n del Incidente:</label>
+                    <textarea id="descripcion-incidente" name="descripcion-incidente" rows="5" placeholder="Describe el incidente" required></textarea>
+
+                    <button type="submit">Enviar Reporte</button>
+                </form>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 LogiMap. Todos los derechos reservados.</p>
+        </footer>
+    </div>
+</body>
+</html>
