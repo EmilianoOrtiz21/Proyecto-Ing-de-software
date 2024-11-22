@@ -69,15 +69,15 @@ class AdminConductores {
             $query = $this->conexionBD->prepare("SELECT id_paquete FROM entregas WHERE estado_entrega = 'Pendiente'");
             $query->execute();
             $paquetesPendientes = $query->fetchAll(PDO::FETCH_ASSOC);
-            // Obtener la lista de conductores
-            $query = $this->conexionBD->prepare("SELECT c.id FROM conductor c JOIN estadoConductor e ON c.id_estadoConductor = e.id;");
+            // Obtener la lista de conductores activos
+            $query = $this->conexionBD->prepare("SELECT c.id FROM conductor c JOIN estadoConductor e ON c.id_estadoConductor = e.id WHERE descripcion = 'Activo';");
             $query->execute();
             $conductores = $query->fetchAll(PDO::FETCH_ASSOC);
             // Verificar si hay paquetes y conductores disponibles
             if (!empty($paquetesPendientes) && !empty($conductores)) {
                 $numPaquetes = count($paquetesPendientes);
                 $numConductores = count($conductores);
-                $fechaEntrega = date('Y-m-d H:i:s');
+                $fechaEntrega = date('Y-m-d H:i:s'); //fecha de hoy
                 // Variables para asignar paquetes
                 $indexConductor = 0;
                 foreach ($paquetesPendientes as $paquete) {
@@ -86,15 +86,22 @@ class AdminConductores {
                     // Actualizar la tabla paquetesConductor con el id del conductor y la fecha de entrega
                     $query = $this->conexionBD->prepare("
                         UPDATE paquetesConductor
-                        SET id_conductor = :id_conductor, fecha_entrega = :fecha_entrega
+                        SET id_conductor = :id_conductor, fecha_entrega = :fecha_entrega, id_estado_entrega = (SELECT id FROM estadoentrega WHERE descripcion = 'Asignado' LIMIT 1)
                         WHERE id_paquete = :id_paquete
                     ");
                     $query->bindParam(':id_conductor', $idConductor);
-                    $query->bindParam(':fecha_entrega', $fechaEntrega);
                     $query->bindParam(':id_paquete', $idPaquete);
+                    $query->bindParam(':fecha_entrega', $fechaEntrega);
                     $query->execute();
                     $indexConductor = ($indexConductor + 1) % $numConductores;
                 }
+                //retornar la tabla de asignaciones
+                $query = $this->conexionBD->prepare("SELECT matricula, p.codigo_unico, ec.fecha_entrega, p.punto_entrega FROM
+                                                     paquetesConductor ec JOIN conductor c ON c.id = ec.id_conductor
+                                                     JOIN paquete p ON p.id = ec.id_paquete ORDER BY matricula;");
+                $query->execute();
+                $resultadoAsignacion = $query->fetchAll(PDO::FETCH_ASSOC);
+                echo json_encode($resultadoAsignacion);
             } else {
                 echo json_encode(['error' => 'No hay paquetes pendientes o conductores disponibles']);
             }
@@ -102,6 +109,7 @@ class AdminConductores {
             echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
         }
     }
+
 
 
     public function actualizarConductor($datos) {
