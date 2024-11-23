@@ -7,6 +7,7 @@ class Sesion {
     private $conexionBD;
 
     public function __construct() {
+        session_start();
         $this->conexionBD = ConexionBD::getInstancia()->getConexion();
     }
 
