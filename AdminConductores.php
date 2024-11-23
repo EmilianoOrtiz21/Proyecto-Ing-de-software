@@ -109,7 +109,19 @@ class AdminConductores {
             echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
         }
     }
-
+    public function dameAsignacionPaquetes(){
+        try{
+            $query = $this->conexionBD->prepare("SELECT matricula, p.codigo_unico, ec.fecha_entrega, p.punto_entrega FROM
+                                                paquetesConductor ec JOIN conductor c ON c.id = ec.id_conductor
+                                                         JOIN paquete p ON p.id = ec.id_paquete ORDER BY matricula;");
+            $query->execute();
+            $resultadoAsignacion = $query->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($resultadoAsignacion);
+        }
+        catch (PDOException $e) {
+            echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
+        }
+    }
 
 
     public function actualizarConductor($datos) {
