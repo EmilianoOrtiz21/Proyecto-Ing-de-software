@@ -43,7 +43,9 @@ class Aplicacion {
             case 'cargarEstados':
                 return $this->adminConductores->dameEstadosEntrega();
             case 'asignarHorario':
-                return $this->adminPaquetes->asignarFranjaHoraria($solicitud['franja_horaria_min'], $solicitud['franja_horaria_max']);
+                $horario['franja_horaria_min'] = $solicitud['franja_horaria_min'];
+                $horario['franja_horaria_max'] = $solicitud['franja_horaria_max'];
+                return $this->adminPaquetes->fijaHorario($horario);
             case 'obtenerEstadoEntrega':
                 return $this->adminPaquetes->dameEstadoEntrega($solicitud['codigo']);
             case 'listarPaquetes':
