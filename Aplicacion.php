@@ -1,4 +1,6 @@
 <?php
+header('Content-Type: application/json');
+
 require_once 'ConexionBD.php';
 require_once 'Sesion.php';
 require_once 'AdminConductores.php';
@@ -42,6 +44,12 @@ class Aplicacion {
                 return $this->adminConductores->CrearConductor($nombre, $telefono, $correo, $usuario, $contrasena, $matricula, $estado);
             case 'cargarEstados':
                 return $this->adminConductores->dameEstadosEntrega();
+                break;
+            case 'asignarPaquetes':
+                return $this->adminConductores->asignaPaquetes();
+                break;
+            case 'obtenerAsignacionPaquetes':
+                return $this->adminConductores->dameAsignacionPaquetes();
             case 'asignarHorario':
                 $horario['franja_horaria_min'] = $solicitud['franja_horaria_min'];
                 $horario['franja_horaria_max'] = $solicitud['franja_horaria_max'];
@@ -51,9 +59,26 @@ class Aplicacion {
             case 'listarPaquetes':
                 return $this->adminPaquetes->listarPaquetes();
             case 'crearReporteConductor':
-                return $this->adminReportes->crearReporteConductor($solicitud['idConductor'], $solicitud['datos']);
+                return $this->adminReportes->crearReporteConductor(
+                    $solicitud['usuario'],
+                    $solicitud['codigoPaquete'],
+                    $solicitud['descripcion']
+                );
+
+            case 'crearReporteUsuario':
+                return $this->adminReportes->crearReporteUsuario(
+                    $solicitud['codigoPaquete'],
+                    $solicitud['descripcion']
+                );
+
+            case 'listarReportesConductores':
+                return $this->adminReportes->listarReportesConductores();
+
+            case 'listarReportesUsuarios':
+                return $this->adminReportes->listarReportesUsuarios();
+
             default:
-                return "Acción no reconocida";
+                return "Acción no reconocda";
         }
     }
 }
