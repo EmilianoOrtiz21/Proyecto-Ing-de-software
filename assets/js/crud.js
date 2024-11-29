@@ -1,10 +1,10 @@
-        // Cargar los estados desde el servidor al cargar la página
+        // Cargar los estados desde el servidor al cargar la pï¿½gina
         document.addEventListener('DOMContentLoaded', cargarEstados);
 
-        // Función para cargar los estados en el select
+        // Funciï¿½n para cargar los estados en el select
         async function cargarEstados() {
             try {
-                const response = await fetch('index.php', {
+                const response = await fetch('../../public/index.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -28,7 +28,7 @@
 async function asignarPaquetes(){
     const datos = {accion: 'asignarPaquetes'};
     try {
-        const response = await fetch('index.php', {
+        const response = await fetch('../../public/index.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -39,12 +39,12 @@ async function asignarPaquetes(){
         console.error('Error al enviar los datos:', error);
     }
 }
-        // Función para enviar los datos del formulario al servidor
+        // Funciï¿½n para enviar los datos del formulario al servidor
 async function enviarDatos(accion) {
     const estadoConductor = document.getElementById('estadoConductor').value;
     // Validar que el estado sea seleccionado
     if (estadoConductor === "") {
-        alert("Por favor, selecciona un estado válido para el conductor.");
+        alert("Por favor, selecciona un estado vï¿½lido para el conductor.");
         return;
     }
 
@@ -62,7 +62,7 @@ async function enviarDatos(accion) {
         accion:accion
     }
     try {
-        const response = await fetch('index.php', {
+        const response = await fetch('../../public/index.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

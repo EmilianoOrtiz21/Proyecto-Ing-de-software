@@ -1,63 +1,48 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesi&oacute;n</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="logopng.png" type="image/png">
-    <style>
-    .contenedorLogin {
-        width: 100%;
-        height: 100%;
-        flex-direction: column;
-    }
-    .cuadroLogin {
-        padding: 40px;
-        max-width: 400px;
-        width: 100%;
-        text-align:center;
-    }
-    .grupoInput {
-        margin-bottom: 20px;
-        text-align: left;
-    }
-    .grupoInput label {
-        display:block;
-        margin-bottom: 5px;
-    }
-    .grupoInput input {
-        font-size: 16px;
-    }
-    .botonLogin {
-        font-size: 18px;
-        width: 100%;
-    }
-    .botonLogin:hover {
-        background-color: #ffd700;
-    }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión</title>
+  <link rel="stylesheet" href="../../assets/css/login.css">
+  <link rel="icon" href="../../assets/img/fevicon.ico" type="image/x-icon">
 </head>
-<body>
-    <div class="alineacion contenedorLogin">
-        <header>
-            <img src="logopng.png" alt="Logo" class="logo">
-            <h1>LOGIMAP</h1>
-        </header>
-        <div class="contenedor cuadroLogin">
-            <h2>Iniciar sesi&oacute;n</h2>
-            <form action="/login" method="post">
-                <div class="grupoInput">
-                    <label for="correoElectronico">Correo electr&oacute;nico</label>
-                    <input type="email" id="correoElectronico" name="correoElectronico" placeholder="ejemplo@correo.com" required>
-                </div>
-                <div class="grupoInput">
-                    <label for="contrasena">Contrase&ntilde;a</label>
-                    <input type="password" id="contrasena" name="contrasena" required>
-                </div>
-                <button type="submit" class="botonLogin">Ingresar</button>
-            </form>
+<body class="main-layout">
+  <div class="container">
+    <div class="backbox">
+      <div class="loginMsg">
+        <div class="textcontent">
+          <p class="title">¿No tiene cuenta?</p>
+          <p>Contáctese con el administrador<br> para que le genere una nueva.</p>
+          <button id="switch1" onclick="window.location.href='https://wa.link/1pc7yw'">Contactarse</button>
         </div>
+      </div>
     </div>
+    <!-- backbox -->
+
+    <div class="frontbox">
+      <div class="login">
+        <h2>Iniciar Sesión</h2>
+        <!-- Mostrar mensajes de error -->
+        <?php if (isset($_GET['error'])): ?>
+          <div class="errorMensaje" style="color: red; margin-bottom: 10px;">
+            <?= htmlspecialchars($_GET['error']) ?>
+          </div>
+        <?php endif; ?>
+        <form method="POST" action="../../public/login.php">
+          <div class="inputbox">
+            <input type="text" name="usuario" placeholder="USUARIO" required>
+            <input type="password" name="contrasena" placeholder="PASSWORD" required>
+          </div>
+          <p>
+            <a href="https://wa.link/74ce85" target="_blank" style="text-decoration: none; color: inherit;">
+              Olvidé mi contraseña
+            </a>
+          </p>
+          <button type="submit">ENTRAR</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

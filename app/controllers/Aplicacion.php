@@ -1,9 +1,9 @@
 <?php
-require_once 'ConexionBD.php';
-require_once 'Sesion.php';
-require_once 'AdminConductores.php';
-require_once 'AdminPaquetes.php';
-require_once 'AdminReportes.php';
+require_once __DIR__ . '/../models/conexionBD.php';
+require_once __DIR__ . '/../models/Sesion.php';
+require_once __DIR__ . '/AdminConductores.php';
+require_once __DIR__ . '/AdminPaquetes.php';
+require_once __DIR__ . '/AdminReportes.php';
 
 class Aplicacion {
     private $sesion;

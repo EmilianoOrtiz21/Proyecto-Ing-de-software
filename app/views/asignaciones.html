@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- Site metas -->
+    <title>ogistic</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    <!-- Favicon -->
+    <link rel="icon" href="../../assets/images/fevicon.ico" type="image/x-icon">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="../../assets/css/jquery.mCustomScrollbar.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- Fancybox -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="main-layout">
+    <!-- Loader -->
+    <div class="loader_bg">
+        <div class="loader"><img src="../../assets/img/loading.gif" alt="#" /></div>
+    </div>
+    <!-- End loader -->
+
+    <!-- Header -->
+    <header>
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="logo">
+                            <a href="index.html"><img src="../../assets/img/logo.png" alt="#" /></a>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <div class="right_bottun">
+                            <ul class="conat_info d_none">
+                                <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- End header -->
+
+    <!-- Banner -->
+    <section class="banner_main" style="min-height: 800px;">
+        <div id="banner1" class="carousel slide banner_slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#banner1" data-slide-to="0" class="active"></li>
+                <li data-target="#banner1" data-slide-to="1"></li>
+                <li data-target="#banner1" data-slide-to="2"></li>
+            </ol>
+            <div id="contact" class="contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="titlepage">
+                                <h2>Asignación de entregas</h2>
+                                <br>
+                                <p style="font-size:larger">
+                                    Aquí puedes asignar paquetes a un determinado transportista, para que los tenga en su lista para entregar.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <button type="button" onclick="asignarPaquetes()" id = "asignar">asignar Paq</button>
+                <button type="button" onclick="obtenerAsignacionPaquetes()">Mostrar</button>         <div id="transportistas-section" class="section">
+                    <div class="container-fluid">
+                        <div class="table-responsive">
+                            <table id="asignacionPaquetes">
+                                <thead>
+                                    <tr>
+                                        <th>Matricula</th>
+                                        <th>Código</th>
+                                        <th>Fecha entrega</th>
+                                        <th>Direccion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Contenido dinámico aquí -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End banner -->
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer bottom_cross1">
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>© 2024 All Rights Reserved. Developed by <a href="#">Softweros</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+
+    <!-- Javascript files -->
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/popper.min.js"></script>
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/jquery-3.0.0.min.js"></script>
+    <script src="../../assets/js/asignaPaquetes.js"></script>
+    <!-- Sidebar -->
+    <script src="../../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../assets/js/custom.js"></script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidepanel").style.width = "0";
+        }
+        async function obtenerAsignacionPaquetes() {
+            const datos = { accion: 'obtenerAsignacionPaquetes' };
+            try {
+                const response = await fetch('../../public/index.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datos),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Datos de paquetes:', data);
+
+                // Actualizar la tabla
+                const tbody = document.querySelector('#asignacionPaquetes tbody');
+                tbody.innerHTML = ''; // Limpia la tabla
+
+                data.forEach(item => {
+                    const row = document.createElement('tr');
+
+                    row.innerHTML = `
+                        <td>${item.matricula}</td>
+                        <td>${item.codigo_unico}</td>
+                        <td>${item.fecha_entrega}</td>
+                        <td>${item.punto_entrega}</td>
+                    `;
+
+                    tbody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error al obtener los datos:', error);
+            }
+        }
+
+    </script>
+</body>
+
+</html>

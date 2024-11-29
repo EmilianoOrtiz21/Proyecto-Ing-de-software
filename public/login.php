@@ -1,33 +1,39 @@
 <?php
 session_start();
-include("Sesion.php");
+include_once realpath(__DIR__ . '/../app/models/Sesion.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nombreUsuario = $_POST['usuario'];
+    $usuario = $_POST['usuario'];
     $contrasena = $_POST['contrasena'];
 
     $sesion = new Sesion();
 
-    if ($sesion->iniciarSesion($nombreUsuario, $contrasena)) {
+    // Depuración: verifica que los datos lleguen correctamente
+    var_dump($usuario, $contrasena);
+    var_dump($_POST);
+
+
+    if ($sesion->iniciarSesion($usuario, $contrasena)) {
+        // Depuración: verifica que se entra en la redirección
+        echo "Inicio de sesión exitoso, redirigiendo...";
+
         // Redirigir según el rol
         if ($sesion->esAdmin()) {
-            header("Location: dashboard_admin.php");
+            header("Location: ../app/views/dashboard_admin.html");
+            exit;
         } elseif ($sesion->esConductor()) {
-            header("Location: dashboard_conductor.php");
+            header("Location: ../app/views/panel_repartidor.html");
+            exit;
         } else {
             header("Location: dashboard_cliente.php");
+            exit;
         }
     } else {
-        echo "Credenciales incorrectas";
+        // Depuración: verifica que el inicio de sesión falló
+        echo "Inicio de sesión fallido.";
+        $error = urlencode("Credenciales incorrectas");
+        header("Location: ../app/views/interfazPrueba_login.html?error=$error");
+        exit;
     }
 }
 ?>
-<form method="POST">
-    <label for="usuario">Usuario:</label>
-    <input type="text" name="usuario" required>
-    
-    <label for="contrasena">Contraseña:</label>
-    <input type="password" name="contrasena" required>
-
-    <button type="submit">Iniciar sesión</button>
-</form>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>ogistic</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" href="../../assets/css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="../../assets/css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="../../assets/img/fevicon.ico" type="image/x-icon">
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="../../assets/css/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+   </head>
+   <!-- body -->
+   <body class="main-layout">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="../../assets/img/loading.gif" alt="#" /></div>
+      </div>
+      <!-- end loader -->
+      <!-- header -->
+      <header>
+         <!-- header inner -->
+         <div class="header">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-md-4 col-sm-4">
+                     <div class="logo">
+                        <a href="index.html"><img src="../../assets/img/logo.png" alt="#" /></a>
+                     </div>
+                  </div>
+                  <div class="col-md-8 col-sm-8">
+                     <div class="right_bottun">
+                        <ul class="conat_info d_none">
+                           <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <!-- end header inner -->
+      <!-- end header -->
+      <!-- banner -->
+      <section class="banner_main" style="min-height: 800px;">
+         <div id="banner1" class="carousel slide banner_slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+               <li data-target="#banner1" data-slide-to="0" class="active"></li>
+               <li data-target="#banner1" data-slide-to="1"></li>
+               <li data-target="#banner1" data-slide-to="2"></li>
+            </ol>
+            <div id="contact" class="contact">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="titlepage">
+                           <h2>Bienvenido al panel de administrador</h2>
+                           <br>
+                           <p style="font-size:larger">
+                              Aquí puedes gestionar todo lo relacionado a tus transportistas y sus paquetes. Agregar, editar, asignar,
+                              o eliminar.
+                           </p>
+                           <div class="grupoBotones">
+                              <button type="button" onclick="showSection('transportistas-section')" class="send_btn">Administrar
+                                 transportistas</button>
+                              <button type="button" onclick="showSection('paquetes-section'); cargaPaquetes()" class="send_btn">Administrar
+                                 paquetes</button>
+                              <button type="button" onclick="window.location.href='asignaciones.html'" class="send_btn">Asignar entregas</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Sección de Transportistas -->
+               <div id="transportistas-section" class="section" style="display: none;">
+                  <div class="container-fluid">
+                      <h1 class="h1">Registrar nuevo transportista</h1>
+                      <div class="grupoBotones">
+                          <button type="button" onclick="window.location.href='crear_repartidor.html'"  style="width: 180px; height: 50px; padding: 5px 10px;">Añadir nuevo</button>
+                      </div>
+                      <div class="table-responsive">
+                          <table class="table table-bordered table-striped">
+                              <thead>
+                                  <tr>
+                                      <th>ID</th>
+                                      <th>Nombre Completo</th>
+                                      <th>Email</th>
+                                      <th>Teléfono</th>
+                                      <!-- <th>Usuario</th> Eliminada la columna Usuario -->
+                                      <th>Matrícula</th>
+                                      <th>Estado</th>
+                                      <th>Editar</th>
+                                      <th>Eliminar</th>
+                                  </tr>
+                              </thead>
+                              <tbody id="tabla-conductores">
+                                  <!-- Las filas se llenarán dinámicamente -->
+                              </tbody>
+                          </table>
+                          <div id="error-conductores" style="color: red; text-align: center;"></div>
+                      </div>
+                  </div>
+              </div>
+              
+               <!-- Sección de Paquetes -->
+               <div id="paquetes-section" class="section" style="display: none;">
+                  <div class="container-fluid">
+                     <h1 class="h1">Gestión de paquetes</h1>
+                     <div class="grupoBotones">
+                        <button type="button" onclick="window.location.href='crear_paquete.html'"
+                           style="width: 180px; height: 50px; padding: 5px 10px;">Añadir nuevo</button>
+                     </div>
+                     <div class="table-responsive">
+                        <table class="table table-bordered table-striped" id="tabla_paquetes">
+                           <thead>
+                              <tr>
+                                <th>Código del Paquete</th>
+                                <th>Nombre del Destinatario</th>
+                                <th>Franja Horaria Mínima</th>
+                                <th>Franja Horaria Máxima</th>
+                              </tr>
+                           </thead>
+                           <tbody>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Script para Mostrar Secciones -->
+               <script>
+                  function showSection(sectionId) {
+                     // Ocultar todas las secciones
+                     document.querySelectorAll('.section').forEach(section => {
+                        section.style.display = 'none';
+                     });
+
+                     // Mostrar solo la sección seleccionada
+                     document.getElementById(sectionId).style.display = 'block';
+                  }
+               </script>
+            </div>
+         </div>
+      </section>
+      <!-- end banner -->
+
+
+      <!--  footer -->
+      <footer>
+         <div class="footer bottom_cross1">
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <p>© 2024 All Rights Reserved. Developed by Softweros</a></p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer>
+      <!-- end footer -->
+
+
+      <!-- Javascript files-->
+      <script src="../../assets/js/jquery.min.js"></script>
+      <script src="../../assets/js/popper.min.js"></script>
+      <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+      <script src="../../assets/js/jquery-3.0.0.min.js"></script>
+      <script src="../../assets/paqueteCliente.js"></script>
+
+      <!-- sidebar -->
+      <script src="../../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="../../assets/js/custom.js"></script>
+      <script>
+         function openNav() {
+           document.getElementById("mySidepanel").style.width = "250px";
+         }
+
+         function closeNav() {
+           document.getElementById("mySidepanel").style.width = "0";
+         }
+      </script>
+   </body>
+
+
+<!-- Script para Cargar Conductores -->
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+       // Reemplaza la URL con la ruta correcta a tu endpoint PHP
+       const apiUrl = '../../api/conductores_api.php'; 
+
+       fetch(apiUrl)
+           .then(response => response.json())
+           .then(data => {
+               const tbody = document.getElementById('tabla-conductores');
+               const errorDiv = document.getElementById('error-conductores');
+
+               if (data.error) {
+                   errorDiv.textContent = data.error;
+                   return;
+               }
+
+               if (data.length === 0) {
+                   tbody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No se encontraron conductores.</td></tr>';
+                   return;
+               }
+
+               data.forEach(conductor => {
+                   const tr = document.createElement('tr');
+
+                   tr.innerHTML = `
+                       <td>${escapeHTML(conductor.id)}</td>
+                       <td>${escapeHTML(conductor.nombre_completo)}</td>
+                       <td>${escapeHTML(conductor.correo)}</td>
+                       <td>${escapeHTML(conductor.telefono)}</td>
+                       <!-- <td>${escapeHTML(conductor.usuario)}</td> Eliminada la columna Usuario -->
+                       <td>${escapeHTML(conductor.matricula)}</td>
+                       <td>${escapeHTML(conductor.estado)}</td>
+                       <td><a href="editar_repartidor.php?id=${encodeURIComponent(conductor.id)}">Editar</a></td>
+                       <td><a href="eliminar_repartidor.php?id=${encodeURIComponent(conductor.id)}" onclick="return confirm('¿Estás seguro de eliminar este conductor?');">Eliminar</a></td>
+                   `;
+
+                   tbody.appendChild(tr);
+               });
+           })
+           .catch(error => {
+               console.error('Error al obtener los conductores:', error);
+               const errorDiv = document.getElementById('error-conductores');
+               errorDiv.textContent = 'Ocurrió un error al obtener los conductores.';
+           });
+   });
+
+   // Función para escapar caracteres HTML y prevenir XSS
+   function escapeHTML(str) {
+       if (typeof str !== 'string') {
+           return str;
+       }
+       return str.replace(/[&<>"'`=\/]/g, function (s) {
+           return ({
+               '&': '&amp;',
+               '<': '&lt;',
+               '>': '&gt;',
+               '"': '&quot;',
+               "'": '&#39;',
+               '/': '&#x2F;',
+               '`': '&#x60;',
+               '=': '&#x3D;'
+           })[s];
+       });
+   }
+</script>
+
+
+</html>

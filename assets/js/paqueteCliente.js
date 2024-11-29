@@ -4,17 +4,17 @@ const formularioListarPaquetes = document.getElementById('form_listar_paquetes')
 const mensaje = document.getElementById('mensaje_error');
 const datosPaquete = document.getElementById('datos_Paquete');
 const tablaPaquetes = document.getElementById('tabla_paquetes').getElementsByTagName('tbody')[0];
-const urlServidor = 'index.php';
+const urlServidor = '../../public/index.php';
 const BUSCAR_PAQUETE = 'obtenerEstadoEntrega';
 const ASIGNAR_HORARIO = 'asignarHorario';
 const LISTAR_PAQUETES = 'listarPaquetes';
 
-// Función para mostrar mensajes de error o éxito
+// Funciï¿½n para mostrar mensajes de error o ï¿½xito
 function mostrarMensaje(mensajeTexto) {
     mensaje.textContent = mensajeTexto;
 }
 
-// Función para hacer la solicitud Fetch
+// Funciï¿½n para hacer la solicitud Fetch
 function hacerFetch(url, datos) {
     return fetch(url, {
         method: 'POST',
@@ -26,11 +26,11 @@ function hacerFetch(url, datos) {
     .then(respuesta => respuesta.json())
     .catch(error => {
         console.error('Error:', error);
-        mostrarMensaje('Ocurrió un error al comunicar con el servidor.');
+        mostrarMensaje('Ocurriï¿½ un error al comunicar con el servidor.');
     });
 }
 
-// Función para convertir hora en formato HH:MM a minutos
+// Funciï¿½n para convertir hora en formato HH:MM a minutos
 function convertirAMinutos(hora) {
     const [horas, minutos] = hora.split(':');
     return parseInt(horas) * 60 + parseInt(minutos);
@@ -58,9 +58,9 @@ formularioConsultarEstado.addEventListener('submit', function(evento) {
                 datosPaquete.innerHTML = '';
                 const elementos = [
                     `Estado de Entrega: ${datos.estado_entrega}`,
-                    `Código Único: ${datos.codigo_unico}`,
-                    `Franja Horaria Mínima: ${datos.franja_horaria_min || 'No asignado'}`,
-                    `Franja Horaria Máxima: ${datos.franja_horaria_max || 'No asignado'}`
+                    `Cï¿½digo ï¿½nico: ${datos.codigo_unico}`,
+                    `Franja Horaria Mï¿½nima: ${datos.franja_horaria_min || 'No asignado'}`,
+                    `Franja Horaria Mï¿½xima: ${datos.franja_horaria_max || 'No asignado'}`
                 ];
                 elementos.forEach(elemento => {
                     const li = document.createElement('li');
@@ -77,7 +77,7 @@ formularioAsignarHorario.addEventListener('submit', function(evento) {
     const franjaHorariaMin = document.getElementById('franja_horaria_min').value;
     const franjaHorariaMax = document.getElementById('franja_horaria_max').value;
 
-    // Verificación de horarios
+    // Verificaciï¿½n de horarios
     if (!franjaHorariaMin || !franjaHorariaMax) {
         mostrarMensaje('Por favor, seleccione ambos horarios.');
         return;
@@ -87,7 +87,7 @@ formularioAsignarHorario.addEventListener('submit', function(evento) {
     const minutosMax = convertirAMinutos(franjaHorariaMax);
 
     if (minutosMin >= minutosMax) {
-        mostrarMensaje("El horario mínimo debe ser menor que el horario máximo.");
+        mostrarMensaje("El horario mï¿½nimo debe ser menor que el horario mï¿½ximo.");
     } else {
         const horario = {
             accion: ASIGNAR_HORARIO,
@@ -100,7 +100,7 @@ formularioAsignarHorario.addEventListener('submit', function(evento) {
                 if (datos.error) {
                     mostrarMensaje(datos.error);  // Mostrar error si se recibe del backend
                 } else {
-                    mostrarMensaje(datos.resultado || "Horario asignado con éxito.");
+                    mostrarMensaje(datos.resultado || "Horario asignado con ï¿½xito.");
                 }
             });
     }

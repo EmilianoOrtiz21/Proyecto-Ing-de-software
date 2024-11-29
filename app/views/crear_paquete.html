@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>ogistic</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="../../assets/css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="../../assets/img/fevicon.ico" type="image/x-icon">
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="../../assets/css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+        media="screen">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+
+<body class="main-layout">
+    <!-- loader  -->
+    <div class="loader_bg">
+        <div class="loader"><img src="../../assets/img/loading.gif" alt="#" /></div>
+    </div>
+    <!-- end loader -->
+    <!-- header -->
+    <header>
+        <!-- header inner -->
+        <div class="header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <div class="logo">
+                            <a href="index.html"><img src="../../assets/img/logo.png" alt="#" /></a>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <div class="right_bottun">
+                            <ul class="conat_info d_none">
+                                <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- end header inner -->
+    <!-- end header -->
+    <!-- banner -->
+    <section class="banner_main" style="min-height: 800px;">
+        <div id="banner1" class="carousel slide banner_slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#banner1" data-slide-to="0" class="active"></li>
+                <li data-target="#banner1" data-slide-to="1"></li>
+                <li data-target="#banner1" data-slide-to="2"></li>
+            </ol>
+            <div id="contact" class="contact">
+                <div class="con_bg">
+                    <div class="container-fluid">
+                        <h1 class="h1">Dar de alta un nuevo paquete</h1>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <form id="formPaquete" class="main_form">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input class="contactus" placeholder="Destinatario" type="text" name="destinatario" required>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input class="contactus" placeholder="Número de teléfono" type="number" name="numero" required>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input class="contactus" placeholder="Calle y número" type="text" name="calle_y_numero" required>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input class="contactus" placeholder="Colonia" type="text" name="colonia" required>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <select class="contactus" name="estadoConductor" required>
+                                                <option value="" disabled selected>Seleccione un estado</option>
+                                                <option value="AGU">Aguascalientes</option>
+                                                <option value="BCN">Baja California</option>
+                                                <option value="BCS">Baja California Sur</option>
+                                                <option value="CAM">Campeche</option>
+                                                <option value="CHP">Chiapas</option>
+                                                <option value="CHH">Chihuahua</option>
+                                                <option value="COA">Coahuila</option>
+                                                <option value="COL">Colima</option>
+                                                <option value="DIF">Ciudad de México</option>
+                                                <option value="DUR">Durango</option>
+                                                <option value="GTO">Guanajuato</option>
+                                                <option value="GRO">Guerrero</option>
+                                                <option value="HGO">Hidalgo</option>
+                                                <option value="JAL">Jalisco</option>
+                                                <option value="MEX">Estado de México</option>
+                                                <option value="MIC">Michoacán</option>
+                                                <option value="MOR">Morelos</option>
+                                                <option value="NAY">Nayarit</option>
+                                                <option value="NLE">Nuevo León</option>
+                                                <option value="OAX">Oaxaca</option>
+                                                <option value="PUE">Puebla</option>
+                                                <option value="QRO">Querétaro</option>
+                                                <option value="QROO">Quintana Roo</option>
+                                                <option value="SLP">San Luis Potosí</option>
+                                                <option value="SIN">Sinaloa</option>
+                                                <option value="SON">Sonora</option>
+                                                <option value="TAB">Tabasco</option>
+                                                <option value="TAM">Tamaulipas</option>
+                                                <option value="TLX">Tlaxcala</option>
+                                                <option value="VER">Veracruz</option>
+                                                <option value="YUC">Yucatán</option>
+                                                <option value="ZAC">Zacatecas</option>
+                                            </select>
+                                        
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input class="contactus" placeholder="Peso (kg)" type="number" name="peso" required min="0.1" step="0.1">
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <input class="contactus" placeholder="Dimensiones (cm x cm)" type="text" name="dimensiones" required
+                                                pattern="^\d+\s*x\s*\d+$"
+                                                title="Por favor ingrese las dimensiones en el formato: número x número (ejemplo: 10 x 20)">
+                                        </div>
+                                        <div class="grupoBotones">
+                                            <button type="submit" class="send_btn" style="width: 150px; height:50px; margin-left: 16px;">Crear</button>
+                                                style="width: 150px; height:50px; margin-left: 16px;">Crear</button>
+                                        </div>
+
+
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="col-md-7">
+                                <div class="co_tru">
+                                    <figure><img src="../../assets/img/paquete.png" alt="#" /></figure>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end banner -->
+
+    <!--  footer -->
+    <footer>
+        <div class="footer bottom_cross1">
+            <div class="copyright">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>© 2024 All Rights Reserved. Developed by Softweros</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+
+
+    <!-- Javascript files-->
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/popper.min.js"></script>
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/js/jquery-3.0.0.min.js"></script>
+    <!-- sidebar -->
+    <script src="../../assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../assets/js/custom.js"></script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidepanel").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidepanel").style.width = "0";
+        }
+    </script>
+</body>
+
+</html>

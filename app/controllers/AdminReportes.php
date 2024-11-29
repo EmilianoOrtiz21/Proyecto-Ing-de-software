@@ -1,5 +1,5 @@
 <?php
-require_once 'ConexionBD.php';
+require_once __DIR__ . '/../models/ConexionBD.php';
 
 class AdminReportes {
     private $conexionBD;
